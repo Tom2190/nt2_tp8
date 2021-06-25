@@ -85,7 +85,6 @@
 
 
 <script>
-
 export default {
   name: 'src-formulario',
   components: {},
@@ -97,17 +96,11 @@ export default {
       nombreLengthMax: 15,
       edadMin: 18,
       edadMax: 120,
-      urlUsuarios: 'https://60a42f8cfbd48100179dbb56.mockapi.io/usuarios/'
     }
   },
-  computed: {
-
-  },
-  mounted () {
-
-  },
+  computed: {},
+  mounted () {},
   methods: {
-
     getInicialData() {
       return {
         nombre: '',
@@ -115,18 +108,11 @@ export default {
         email: '',
       }
     },
-
-    async postUsuario() {
-      try {
-        let respuesta = await this.axios.post(this.urlUsuarios, this.formData, {'content-type':'application/json'})
-        this.usuarios.push(respuesta)
-        this.formData = this.getInicialData()
-        this.formState._reset()
-      }
-      catch(error) {
-        console.log(error)
-      }
-    }
+    postUsuario() {
+      this.$store.dispatch('postUsuarioAction',this.formData)
+      this.formData = this.getInicialData()
+      this.formState._reset()
+    },
   }
 }
 </script>
